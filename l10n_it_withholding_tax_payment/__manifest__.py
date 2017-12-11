@@ -11,6 +11,7 @@
     'website': 'https://odoo-community.org/',
     'license': 'AGPL-3',
     "depends": ['account',
+                'l10n_it',
                 'l10n_it_withholding_tax'],
     "data": [
         'views/withholding_tax.xml',

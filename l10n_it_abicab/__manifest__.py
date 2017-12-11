@@ -9,7 +9,7 @@
     'category': 'Localization/Italy',
     'author': "Odoo Italia Network, Odoo Community Association (OCA)",
     'license': 'AGPL-3',
-    'depends': ['account'],
+    'depends': ['account', 'l10n_it'],
     'website': 'http://www.odoo-community.org',
     'data': ['views/abicab_view.xml'],
     'installable': True,

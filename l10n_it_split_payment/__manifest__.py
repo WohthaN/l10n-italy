@@ -13,7 +13,7 @@
               'Odoo Community Association (OCA)',
     'website': 'http://www.abstract.it',
     'license': 'AGPL-3',
-    'depends': ['account'],
+    'depends': ['account', 'l10n_it'],
     'data': [
         'views/account_view.xml',
         'views/config_view.xml',

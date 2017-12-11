@@ -14,6 +14,7 @@
     'website': 'http://www.linkgroup.it/',
     'license': 'LGPL-3',
     "depends": [
+        'l10n_it',
         'l10n_it_vat_registries',
         'account_tax_cash_basis'],
     "data": [

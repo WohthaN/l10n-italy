@@ -13,7 +13,8 @@
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": [
-        'account'
+        'account',
+        'l10n_it'
     ],
     "data": [
         'views/partner_view.xml',

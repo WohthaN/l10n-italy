@@ -13,6 +13,7 @@
     'license': 'AGPL-3',
     "depends": [
         'account',
+        'l10n_it',
         'l10n_it_account',
         'date_range'
         ],

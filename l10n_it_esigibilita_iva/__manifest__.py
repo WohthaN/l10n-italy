@@ -12,6 +12,7 @@
     'license': 'LGPL-3',
     'depends': [
         'account',
+        'l10n_it'
     ],
     'data': [
         'views/account_view.xml',

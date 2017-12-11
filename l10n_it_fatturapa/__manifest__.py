@@ -14,6 +14,7 @@
     'license': 'LGPL-3',
     "depends": [
         'account',
+        'l10n_it',
         'l10n_it_fiscalcode',
         'document',
         'l10n_it_ipa',

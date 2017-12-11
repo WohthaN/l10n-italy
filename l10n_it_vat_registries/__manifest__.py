@@ -17,6 +17,7 @@
     "depends": [
         'base_setup',
         'account',
+        'l10n_it',
         'l10n_it_account',
         'report',
         'account_tax_balance',
