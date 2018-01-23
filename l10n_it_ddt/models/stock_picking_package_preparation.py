@@ -220,27 +220,24 @@ class StockPickingPackagePreparation(models.Model):
 
     @api.multi
     @api.depends('package_id',
-                 'package_id.children_ids',
-                 'package_id.quant_ids',
                  'picking_ids',
                  'picking_ids.move_lines',
-                 'picking_ids.move_lines.quant_ids',
                  'weight_manual')
     def _compute_weight(self):
         super(StockPickingPackagePreparation, self)._compute_weight()
         for prep in self:
             if prep.weight_manual:
                 prep.weight = prep.weight_manual
-            elif not prep.package_id:
-                quants = self.env['stock.quant']
-                for picking in prep.picking_ids:
-                    for line in picking.move_lines:
-                        for quant in line.quant_ids:
-                            if quant.qty >= 0:
-                                quants |= quant
-                weight = sum(l.product_id.weight * l.qty for l in quants)
-                prep.net_weight = weight
-                prep.weight = weight
+            # elif not prep.package_id:
+            #     quants = self.env['stock.quant']
+            #     for picking in prep.picking_ids:
+            #         for line in picking.move_lines:
+            #             for quant in line.quant_ids:
+            #                 if quant.qty >= 0:
+            #                     quants |= quant
+            #     weight = sum(l.product_id.weight * l.qty for l in quants)
+            #     prep.net_weight = weight
+            #     prep.weight = weight
 
     def _get_sale_order_ref(self):
         """
@@ -249,8 +246,8 @@ class StockPickingPackagePreparation(models.Model):
         sale_order = False
         for picking in self.picking_ids:
             for sm in picking.move_lines:
-                if sm.procurement_id and sm.procurement_id.sale_line_id:
-                    sale_order = sm.procurement_id.sale_line_id.order_id
+                if sm.sale_line_id:
+                    sale_order = sm.sale_line_id.order_id
                     return sale_order
         return sale_order
 
@@ -439,7 +436,7 @@ class StockPickingPackagePreparationLine(models.Model):
     _inherit = 'stock.picking.package.preparation.line'
 
     sale_line_id = fields.Many2one(
-        related='move_id.procurement_id.sale_line_id',
+        related='move_id.sale_line_id',
         string='Sale order line',
         store=True, readonly=True)
     price_unit = fields.Float('Unit Price', digits=dp.get_precision(
@@ -518,7 +515,7 @@ class StockPickingPackagePreparationLine(models.Model):
             sale_line = False
             if line['move_id']:
                 move = self.env['stock.move'].browse(line['move_id'])
-                sale_line = move.procurement_id.sale_line_id or False
+                sale_line = move.sale_line_id or False
             if sale_line:
                 line['price_unit'] = sale_line.price_unit or 0
                 line['discount'] = sale_line.discount or 0
