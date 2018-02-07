@@ -436,7 +436,7 @@ class StockPickingPackagePreparationLine(models.Model):
     _inherit = 'stock.picking.package.preparation.line'
 
     sale_line_id = fields.Many2one(
-        related='move_id.sale_line_id',
+        related='move_id.move_id.sale_line_id',
         string='Sale order line',
         store=True, readonly=True)
     price_unit = fields.Float('Unit Price', digits=dp.get_precision(
